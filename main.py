@@ -13,7 +13,7 @@ def main():
     clock = pygame.time.Clock()
     
     routine = gameroutine.Routine()
-    game_screen = gamescreen.GameScren(screen)
+    game_screen = gamescreen.GameScreen(screen)
 
     while True:
         for e in pygame.event.get():
