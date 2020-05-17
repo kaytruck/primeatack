@@ -1,5 +1,7 @@
 import pygame
 import sys
+import functools
+import operator
 
 import const
 
@@ -14,19 +16,40 @@ def main():
     bs_label = font_2.render("BS", True, const.WHITE)
     enter_label = font_2.render("ENTER", True, const.WHITE)
 
+    question = 90
     primes = [2, 3, 5]
     primes_labels = []
-    answer = [2, 3, 3, 5]
+    answer = []
 
     while True:
         for e in pygame.event.get():
             if e.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+
+        input_keys = pygame.key.get_pressed()
+        if input_keys[pygame.K_ESCAPE]:
+            pygame.quit()
+            sys.exit()
+        if input_keys[pygame.K_2]:
+            answer.append(2)
+        if input_keys[pygame.K_3]:
+            answer.append(3)
+        if input_keys[pygame.K_5]:
+            answer.append(5)
+        if input_keys[pygame.K_BACKSPACE]:
+            answer.pop()
+        if input_keys[pygame.K_RETURN]:
+            if len(answer) > 0:
+                a = functools.reduce(operator.mul, answer)
+                if question % a == 0:
+                    question /= a
+                    question = int(question)
+                    answer = []
         
         answer_str = " * ".join(map(str, answer))
 
-        question_label = font_1.render(str(90), True, const.WHITE)
+        question_label = font_1.render(str(question), True, const.WHITE)
         answer_label = font_2.render(answer_str, True, const.WHITE)
         primes_labels = [font_2.render(str(p), True, const.WHITE) for p in primes]
 
