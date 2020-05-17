@@ -3,6 +3,7 @@ import sys
 import functools
 import operator
 import random
+from gamestatus import Status
 
 class Routine:
     def __init__(self):
@@ -10,6 +11,7 @@ class Routine:
         self.primes_labels = []
         self.answer = []
         self.level = 1
+        self.status = Status.WAIT_FOR_START
 
         # 問題を生成する
         self.question = self.gen_question()
@@ -18,17 +20,19 @@ class Routine:
         if not input_keys == None:
             if input_keys[pygame.K_ESCAPE]:
                 self.answer = []
+            if input_keys[pygame.K_BACKSPACE]:
+                if len(self.answer) > 0:
+                    self.answer.pop()
+            if input_keys[pygame.K_RETURN]:
+                self.atack()
+            if input_keys[pygame.K_q] and (input_keys[pygame.K_LCTRL] or input_keys[pygame.K_RCTRL]):
+                self.status = Status.QUIT
             if input_keys[pygame.K_2]:
                 self.answer.append(2)
             if input_keys[pygame.K_3]:
                 self.answer.append(3)
             if input_keys[pygame.K_5]:
                 self.answer.append(5)
-            if input_keys[pygame.K_BACKSPACE]:
-                if len(self.answer) > 0:
-                    self.answer.pop()
-            if input_keys[pygame.K_RETURN]:
-                self.atack()
 
         return self.question, self.primes, self.answer
     
