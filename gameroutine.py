@@ -14,19 +14,21 @@ class Routine:
         # 問題を生成する
         self.question = self.gen_question()
 
-    def step(self, keycode):
-        if keycode == pygame.K_ESCAPE:
-            self.answer = []
-        if keycode == pygame.K_2:
-            self.answer.append(2)
-        if keycode == pygame.K_3:
-            self.answer.append(3)
-        if keycode == pygame.K_5:
-            self.answer.append(5)
-        if keycode == pygame.K_BACKSPACE:
-            self.answer.pop()
-        if keycode == pygame.K_RETURN:
-            self.atack()
+    def step(self, input_keys):
+        if not input_keys == None:
+            if input_keys[pygame.K_ESCAPE]:
+                self.answer = []
+            if input_keys[pygame.K_2]:
+                self.answer.append(2)
+            if input_keys[pygame.K_3]:
+                self.answer.append(3)
+            if input_keys[pygame.K_5]:
+                self.answer.append(5)
+            if input_keys[pygame.K_BACKSPACE]:
+                if len(self.answer) > 0:
+                    self.answer.pop()
+            if input_keys[pygame.K_RETURN]:
+                self.atack()
 
         return self.question, self.primes, self.answer
     
