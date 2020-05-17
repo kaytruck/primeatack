@@ -9,18 +9,18 @@ class GameScreen():
         self.font_1 = pygame.font.SysFont(None, 72)
         self.font_2 = pygame.font.SysFont(None, 36)
 
-        self.bs_label = self.font_2.render("BS", True, const.WHITE)
-        self.enter_label = self.font_2.render("ENTER", True, const.WHITE)
+        self.bs_label = self.font_2.render("BS", True, const.COLOR_CHAR)
+        self.enter_label = self.font_2.render("ENTER", True, const.COLOR_CHAR)
     
     def update(self, question, primes, answer):
         # 表示用ラベルの生成
-        question_label = self.font_1.render(str(question), True, const.WHITE)
+        question_label = self.font_1.render(str(question), True, const.COLOR_CHAR)
         answer_str = " * ".join(map(str, answer))
-        answer_label = self.font_2.render(answer_str, True, const.WHITE)
-        primes_labels = [self.font_2.render(str(p), True, const.WHITE) for p in primes]
+        answer_label = self.font_2.render(answer_str, True, const.COLOR_CHAR)
+        primes_labels = [self.font_2.render(str(p), True, const.COLOR_CHAR) for p in primes]
 
         # 描画
-        self.screen.fill(const.BLACK)
+        self.screen.fill(const.COLOR_SCREEN_BG)
         self.screen.blit(question_label, (50, 50))
         self.screen.blit(answer_label, (50, 130))
         for i, p_l in enumerate(primes_labels):
