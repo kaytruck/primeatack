@@ -27,14 +27,20 @@ class Routine:
         if input_keys[pygame.K_BACKSPACE]:
             self.answer.pop()
         if input_keys[pygame.K_RETURN]:
-            if len(self.answer) > 0:
-                a = functools.reduce(operator.mul, self.answer)
-                if self.question % a == 0:
-                    self.question /= a
-                    self.question = int(self.question)
-                    self.answer = []
+            self.atack()
 
         return self.question, self.primes, self.answer
+    
+    def atack(self):
+        if len(self.answer) > 0:
+            a = functools.reduce(operator.mul, self.answer)
+            if self.question % a == 0:
+                self.question /= a
+                self.question = int(self.question)
+                self.answer = []
+        
+        if self.question == 1:
+            self.question = self.gen_question()
     
     def gen_question(self):
         max_c = random.randint(1, self.level + 4)
