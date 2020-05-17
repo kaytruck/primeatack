@@ -16,22 +16,22 @@ class Routine:
         # 問題を生成する
         self.question = self.gen_question()
 
-    def step(self, input_keys):
-        if not input_keys == None:
-            if input_keys[pygame.K_ESCAPE]:
+    def step(self, keys):
+        if not keys == None:
+            if keys[pygame.K_ESCAPE]:
                 self.answer = []
-            if input_keys[pygame.K_BACKSPACE]:
+            if keys[pygame.K_BACKSPACE]:
                 if len(self.answer) > 0:
                     self.answer.pop()
-            if input_keys[pygame.K_RETURN]:
+            if keys[pygame.K_RETURN]:
                 self.atack()
-            if input_keys[pygame.K_q] and (input_keys[pygame.K_LCTRL] or input_keys[pygame.K_RCTRL]):
+            if keys[pygame.K_q] and (keys[pygame.K_LCTRL] or keys[pygame.K_RCTRL]):
                 self.status = Status.QUIT
-            if input_keys[pygame.K_2]:
+            if keys[pygame.K_2]:
                 self.answer.append(2)
-            if input_keys[pygame.K_3]:
+            if keys[pygame.K_3]:
                 self.answer.append(3)
-            if input_keys[pygame.K_5]:
+            if keys[pygame.K_5]:
                 self.answer.append(5)
 
         return self.question, self.primes, self.answer
