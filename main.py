@@ -10,8 +10,8 @@ import gamescreen
 
 def main():
     pygame.init()
-    pygame.key.set_repeat(100, 100)
-    screen = pygame.display.set_mode((600, 400))
+    pygame.key.set_repeat(500, 500)
+    screen = pygame.display.set_mode((const.WINDOW_WIDTH, const.WINDOW_HEIGHT))
     clock = pygame.time.Clock()
     
     routine = gameroutine.Routine()
@@ -25,17 +25,17 @@ def main():
             elif e.type == pygame.KEYDOWN:
                 input_keys = pygame.key.get_pressed()
 
-        question, primes, answer = routine.step(input_keys)
-        if routine.status == Status.QUIT:
+        question, primes, answer, status = routine.step(input_keys)
+        if status == Status.QUIT:
             game_quit()
-        game_screen.update(question, primes, answer)
+        game_screen.update(question, primes, answer, status, routine.time_r_or_w)
 
         input_keys = None
         pygame.display.update()
         clock.tick(30)
 
 def game_quit():
-    pygame.exit()
+    pygame.quit()
     sys.exit()
 
 if __name__ == '__main__':

@@ -1,6 +1,7 @@
 import pygame
 
 import const
+from gamestatus import Status
 
 class GameScreen():
     def __init__(self, screen):
@@ -11,8 +12,9 @@ class GameScreen():
 
         self.bs_label = self.font_2.render("BS", True, const.COLOR_CHAR)
         self.enter_label = self.font_2.render("ENTER", True, const.COLOR_CHAR)
+        self.right_label = self.font_2.render("Right !", True, const.COLOR_RIGHT)
     
-    def update(self, question, primes, answer):
+    def update(self, question, primes, answer, r_or_w, time_r_or_w):
         # 表示用ラベルの生成
         question_label = self.font_1.render(str(question), True, const.COLOR_CHAR)
         answer_str = " * ".join(map(str, answer))
@@ -21,9 +23,15 @@ class GameScreen():
 
         # 描画
         self.screen.fill(const.COLOR_SCREEN_BG)
-        self.screen.blit(question_label, (50, 50))
+        if time_r_or_w == 0:
+            self.screen.blit(question_label, (50, 50))
         self.screen.blit(answer_label, (50, 130))
         for i, p_l in enumerate(primes_labels):
             self.screen.blit(p_l, (50 * (i + 1), 200))
         self.screen.blit(self.bs_label, (400, 250))
         self.screen.blit(self.enter_label, (450, 250))
+
+        if r_or_w == Status.GAMING_RIGHT and time_r_or_w > 0:
+            right_label_rect = self.right_label.get_rect()
+            right_label_rect.center = (const.WINDOW_WIDTH / 2, const.WINDOW_HEIGHT / 2)
+            self.screen.blit(self.right_label, right_label_rect)
