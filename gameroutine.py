@@ -23,7 +23,7 @@ class Routine:
         else:
             self.time_r_or_w = 0
 
-        if keys is None:
+        if keys is not None:
             if keys[pygame.K_ESCAPE]:
                 self.answer = []
             if keys[pygame.K_BACKSPACE]:
