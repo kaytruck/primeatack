@@ -30,6 +30,7 @@ class Routine:
                 if len(self.answer) > 0:
                     self.answer.pop()
             if keys[pygame.K_RETURN]:
+                # Enter押下で割り算を実行する
                 self.atack()
             if keys[pygame.K_q] and (keys[pygame.K_LCTRL]
                                      or keys[pygame.K_RCTRL]):
