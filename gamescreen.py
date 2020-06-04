@@ -3,6 +3,7 @@ import pygame
 import const
 from gamestatus import Status
 
+
 class GameScreen():
     def __init__(self, screen):
         self.screen = screen
@@ -12,14 +13,18 @@ class GameScreen():
 
         self.bs_label = self.font_2.render("BS", True, const.COLOR_CHAR)
         self.enter_label = self.font_2.render("ENTER", True, const.COLOR_CHAR)
-        self.right_label = self.font_2.render("Right !", True, const.COLOR_RIGHT)
-    
+        self.right_label = self.font_2.render("Right !", True,
+                                              const.COLOR_RIGHT)
+
     def update(self, question, primes, answer, r_or_w, time_r_or_w):
         # 表示用ラベルの生成
-        question_label = self.font_1.render(str(question), True, const.COLOR_CHAR)
+        question_label = self.font_1.render(str(question), True,
+                                            const.COLOR_CHAR)
         answer_str = " * ".join(map(str, answer))
         answer_label = self.font_2.render(answer_str, True, const.COLOR_CHAR)
-        primes_labels = [self.font_2.render(str(p), True, const.COLOR_CHAR) for p in primes]
+        primes_labels = [
+            self.font_2.render(str(p), True, const.COLOR_CHAR) for p in primes
+        ]
 
         # 描画
         self.screen.fill(const.COLOR_SCREEN_BG)
@@ -33,5 +38,6 @@ class GameScreen():
 
         if r_or_w == Status.GAMING_RIGHT and time_r_or_w > 0:
             right_label_rect = self.right_label.get_rect()
-            right_label_rect.center = (const.WINDOW_WIDTH / 2, const.WINDOW_HEIGHT / 2)
+            right_label_rect.center = (const.WINDOW_WIDTH / 2,
+                                       const.WINDOW_HEIGHT / 2)
             self.screen.blit(self.right_label, right_label_rect)

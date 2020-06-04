@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class Status(Enum):
     WAIT_FOR_START = 0
     GAMING = 10

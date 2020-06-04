@@ -1,19 +1,17 @@
 import pygame
 import sys
-import functools
-import operator
-
 import const
 from gamestatus import Status
 import gameroutine
 import gamescreen
 
+
 def main():
     pygame.init()
-    pygame.key.set_repeat(500, 500)
+    pygame.key.set_repeat(100, 100)
     screen = pygame.display.set_mode((const.WINDOW_WIDTH, const.WINDOW_HEIGHT))
     clock = pygame.time.Clock()
-    
+
     routine = gameroutine.Routine()
     game_screen = gamescreen.GameScreen(screen)
     input_keys = None
@@ -28,15 +26,18 @@ def main():
         question, primes, answer, status = routine.step(input_keys)
         if status == Status.QUIT:
             game_quit()
-        game_screen.update(question, primes, answer, status, routine.time_r_or_w)
+        game_screen.update(question, primes, answer, status,
+                           routine.time_r_or_w)
 
         input_keys = None
         pygame.display.update()
-        clock.tick(30)
+        clock.tick(20)
+
 
 def game_quit():
     pygame.quit()
     sys.exit()
+
 
 if __name__ == '__main__':
     main()

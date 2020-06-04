@@ -1,9 +1,9 @@
 import pygame
-import sys
 import functools
 import operator
 import random
 from gamestatus import Status
+
 
 class Routine:
     def __init__(self):
@@ -23,7 +23,7 @@ class Routine:
         else:
             self.time_r_or_w = 0
 
-        if not keys == None:
+        if keys is None:
             if keys[pygame.K_ESCAPE]:
                 self.answer = []
             if keys[pygame.K_BACKSPACE]:
@@ -31,7 +31,8 @@ class Routine:
                     self.answer.pop()
             if keys[pygame.K_RETURN]:
                 self.atack()
-            if keys[pygame.K_q] and (keys[pygame.K_LCTRL] or keys[pygame.K_RCTRL]):
+            if keys[pygame.K_q] and (keys[pygame.K_LCTRL]
+                                     or keys[pygame.K_RCTRL]):
                 # Ctrl + q でゲーム終了
                 self.status = Status.QUIT
             if keys[pygame.K_2]:
@@ -42,7 +43,7 @@ class Routine:
                 self.answer.append(5)
 
         return self.question, self.primes, self.answer, self.status
-    
+
     def atack(self):
         """
         素因数の場合、商を求める
@@ -55,13 +56,13 @@ class Routine:
                 self.question /= a
                 self.question = int(self.question)
                 self.answer = []
-        
+
         if self.question == 1:
             # 1まで割り切ったら正解とし、次の問題を表示
             self.status = Status.GAMING_RIGHT
             self.time_r_or_w = 500
             self.question = self.gen_question()
-    
+
     def gen_question(self):
         """
         次の問題を生成する
